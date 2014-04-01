@@ -1,0 +1,14 @@
+vhdl work src/uart_tx.vhd
+vhdl work src/uart_rx.vhd
+vhdl work src/utils.vhd
+vhdl work src/bcd_alu_lut_pack.vhd
+vhdl work src/rom_pack.vhd
+vhdl work src/ps2_keyboard_pack.vhd
+vhdl work src/interface_ps2.vhd
+vhdl work src/bcd_alu.vhd
+vhdl work src/tm16xxFonts.vhd
+vhdl work src/sys_dcm.vhd
+vhdl work src/ps2_keyboard.vhd
+vhdl work src/classic_pack.vhd
+vhdl work src/classic.vhd
+vhdl work src/classicHp_top.vhd
