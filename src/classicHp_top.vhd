@@ -154,7 +154,6 @@ architecture rtl of classichp_top is
   signal sysRstLow     : std_logic;
   signal sysClk        : std_logic;
   signal error         : std_logic;
-  signal update        : std_logic;
   signal status        : std_logic_vector(11 downto 0);
   signal flagsR        : std_logic_vector(11 downto 0);
   signal xreg          : std_logic_vector(55 downto 0);
@@ -238,8 +237,7 @@ begin
           error_o      => error,
           xreg_o       => xreg,
           mask_o       => mask,
-          status_o     => status,
-          update_o     => update
+          status_o     => status
         );
 
   -- This is the PS/2 interface and will return calculator keycodes (plus a few

@@ -47,6 +47,35 @@ use work.classic_pack.all;
 use work.bcd_alu_lut_pack.all;
 use work.rom_pack.all;
 
+--
+-- INPUTS:
+-- clk_i        : Clock
+-- rst_i        : Async Reset
+-- inst_en_i    : Instruction Enable: An op-code is only executed when this is
+--                a '1'. This input can be used to throttle the exection of
+--                op-codes. Setting this a constant '1' will cause op-codes
+--                execute at full speed.
+-- keycode_i    : Key Code: keyvalid_i is used to qualify this input
+-- keyvalid_i   : Key Valid: Pulses high for each new key press. This need to
+--                pulse high for many cycles.  The ROM code will miss see this
+--                high if its not on long enough.  A 10ms pulse seems to be
+--                good.
+-- flags_i      : External flags: Used for a HP-55
+--              
+-- OUTPUTS:     
+-- error_o      : Indicates the core detected an error (all the error conditions
+--                the original calculator's detected).  Sets on an error and
+--                clears on the next valid key input.
+-- display_en_o : Display Enable: Used on the original calculators to flash the
+--                LEDs on an error.  This output is not very useful if the 
+--                throttling it not used to match the original calculaotr's
+--                speed.  Its better to use the error_o output.
+-- xreg_o       : This is a copy of register A.  Used to create the formatted display.
+-- mask_o       : This is a copy of register B.  Used to create the formatted display.
+-- status_o     : The internal status bits. Can be used know when the calculator is
+--                in different modes (i.e. shift active, run, prog, timer,...)
+-- 
+
 entity classic is
     generic (
               ROM       : RomType := ROM_45;
@@ -62,8 +91,7 @@ entity classic is
            display_en_o:   out  std_logic;
            xreg_o      :   out  std_logic_vector (55 downto 0);
            mask_o      :   out  std_logic_vector (55 downto 0);
-           status_o    :   out  std_logic_vector (11 downto 0);
-           update_o    :   out  std_logic
+           status_o    :   out  std_logic_vector (11 downto 0)
            );
 end classic;
 
